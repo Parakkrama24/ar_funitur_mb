@@ -1,4 +1,4 @@
-package com.example.ar_funitur_mb
+package com.example.kmwd
 
 import io.flutter.embedding.android.FlutterActivity
 
