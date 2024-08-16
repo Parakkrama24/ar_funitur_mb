@@ -10,8 +10,8 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   TextEditingController NameController = TextEditingController();
-  TextEditingController Email = TextEditingController();
-  TextEditingController Password = TextEditingController();
+  TextEditingController EmailController = TextEditingController();
+  TextEditingController PasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,26 +38,38 @@ class _RegisterState extends State<Register> {
                 height: 10,
               ),
               TextField(
-                controller: NameController,
-                decoration: apptextDecoration.main(hinttext_: "Enter Name ..."),
+                controller: EmailController,
+                decoration: apptextDecoration.main(hinttext_: "Enter Email ..."),
               ),
               const SizedBox(
                 height: 10,
               ),
               TextField(
-                controller: NameController,
-                decoration: apptextDecoration.main(hinttext_: "Enter Name ..."),
+                obscureText: true,
+                controller: PasswordController,
+                decoration: apptextDecoration.main(hinttext_: "Enter Password ..."),
+              
               ),
-               const SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              GestureDetector(child: Text("Already have an account? ->")),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: buttonDecoration.main(),
+              GestureDetector(
+                child: const Text("Already have an account?"),
+                onTap: () => {Navigator.of(context).pushNamed('/login')},
+              ),
+              const SizedBox(height: 15),
+              GestureDetector(
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: buttonDecoration.main(color_: Colors.red),
+                  child:const Column(mainAxisAlignment: MainAxisAlignment.center
+                    ,children: [
+                    Text("Sign up", style: TextStyle(fontSize: 20, color: Colors.white),),
+                  ],),
+                
+                ),
               )
-
             ],
           ),
         ),

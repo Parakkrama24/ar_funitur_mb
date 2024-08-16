@@ -9,7 +9,10 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
-      )
+      ),
+      body: SafeArea(child: FloatingActionButton(onPressed: ()=>{
+        Navigator.pushNamed(context, '/register')
+      },)),
     );
   }
 }
