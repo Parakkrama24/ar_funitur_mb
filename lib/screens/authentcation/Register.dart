@@ -18,7 +18,7 @@ class _RegisterState extends State<Register> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          "Sign up",
+          "Register",
           style: TextStyle(fontSize: 40),
         ),
       ),

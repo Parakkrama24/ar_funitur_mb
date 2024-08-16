@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class apptextDecoration{
   static InputDecoration main({
@@ -13,6 +14,12 @@ class apptextDecoration{
     );
 
   }
+
+  static InputDecoration secondary({
+    hinttext_="Enter....",
+  }){
+    return InputDecoration();
+  }
 }
 
 class buttonDecoration{
@@ -20,6 +27,22 @@ class buttonDecoration{
     return BoxDecoration(
       color: color_,
       borderRadius: BorderRadius.circular(25),
+    );
+  }
+
+  static BoxDecoration secondary({
+    Color color_ = const Color.fromARGB(221, 14, 3, 3),
+    Color borderColor = Colors.black, // Default border color
+    double borderWidth = 1.0,         // Default border width
+  }) {
+    return BoxDecoration(
+      //color: color_,
+      border: Border.all(
+        color: borderColor,    // Set the border color
+        width: borderWidth, 
+          // Set the border width
+      ),
+      borderRadius:BorderRadius.circular(25) 
     );
   }
 }
