@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context)=>Loginscreen(),
         '/home':(context)=>Home()
       },
-      
+      //hghg
     );
   }
 }

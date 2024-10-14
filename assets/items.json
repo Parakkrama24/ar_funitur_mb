@@ -1,0 +1,15 @@
+[
+    {
+      "name": "Item 1",
+      "price": "10.00",
+      "image": "assets/images/01.png"
+      
+    },
+    {
+      "name": "Item 2",
+      "price": "20.00",
+      "image": "assets/images/02.png"
+     
+    }
+  ]
+  
