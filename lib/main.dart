@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       home:const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4),
-          child: Home()
+          child:const Home()
         ),
       ),
       routes: <String,WidgetBuilder>{

@@ -10,6 +10,12 @@
       "price": "20.00",
       "image": "assets/images/02.png"
      
+    },
+    {
+      "name": "Item 2",
+      "price": "20.00",
+      "image": "assets/images/02.png"
+     
     }
   ]
   
