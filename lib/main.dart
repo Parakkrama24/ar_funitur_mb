@@ -24,13 +24,13 @@ class _MyAppState extends State<MyApp> {
       home:const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4),
-          child:const Home()
+          child:Home()
         ),
       ),
       routes: <String,WidgetBuilder>{
-        '/register': (context) => Register(),
-        '/login': (context)=>Loginscreen(),
-        '/home':(context)=>Home()
+        '/register': (context) => const Register(),
+        '/login': (context)=>const Loginscreen(),
+        '/home':(context)=>const Home()
       },
       //hghg
     );
