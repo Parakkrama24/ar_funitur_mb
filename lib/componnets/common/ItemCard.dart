@@ -3,7 +3,7 @@ import 'package:kmwd/models/Item.dart';
 
 class Itemcard extends StatelessWidget {
   final Item item;
-  const Itemcard({super.key, required this.item});
+  const Itemcard({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

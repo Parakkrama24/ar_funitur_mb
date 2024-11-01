@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class apptextDecoration{
   static InputDecoration main({
     hinttext_="Enter....",
-    labaleText
+    labaleText=null
   }){
     return InputDecoration(
       border: const OutlineInputBorder(),
@@ -17,7 +18,7 @@ class apptextDecoration{
   static InputDecoration secondary({
     hinttext_="Enter....",
   }){
-    return const InputDecoration();
+    return InputDecoration();
   }
 }
 
