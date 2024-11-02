@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/screens/Home.dart';
+import 'package:kmwd/screens/shop.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
@@ -13,9 +14,7 @@ class _NavbarState extends State<Navbar> {
 
   final List<Widget> _screens = [
     const Home(),
-    const Center(
-      child: Text("Search"),
-    ),
+    const Shop(),
     const Center(
       child: Text("Add"),
     ),
@@ -47,7 +46,7 @@ class _NavbarState extends State<Navbar> {
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 219, 32, 7), 
+          color: Color.fromARGB(255, 202, 29, 6), 
           borderRadius: BorderRadius.only(topLeft: Radius.circular(20),
           topRight: Radius.circular(20)), 
           // Set background color to orange
@@ -63,7 +62,7 @@ class _NavbarState extends State<Navbar> {
           backgroundColor: Colors.transparent, // Transparent to show the Container color
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
-          selectedItemColor: const Color.fromARGB(255, 197, 218, 8),
+          selectedItemColor: const Color.fromARGB(255, 224, 55, 3),
           unselectedItemColor: Colors.black54,
           items: const [
             BottomNavigationBarItem(
@@ -71,11 +70,11 @@ class _NavbarState extends State<Navbar> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
+              icon: Icon(Icons.trolley),
+              label: 'Shop',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.category),
               label: 'Add',
             ),
             BottomNavigationBarItem(
@@ -94,7 +93,7 @@ class _NavbarState extends State<Navbar> {
       case 0:
         return 'Home';
       case 1:
-        return 'Search';
+        return 'Shop';
       case 2:
         return 'Add';
       case 3:

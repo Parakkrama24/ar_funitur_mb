@@ -1,8 +1,4 @@
-import 'dart:convert'; // For JSON decoding
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // For loading assets
-import 'package:kmwd/models/Item.dart';
-import 'package:kmwd/componnets/common/ItemCard.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,43 +6,150 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
-
 class _HomeState extends State<Home> {
-  late List<Item> items = [];
-
-  @override
-  void initState() {
-    super.initState();
-    // Load JSON data when the widget initializes
-    _loadItems();
-  }
-
-  // Function to load JSON data
-  Future<void> _loadItems() async {
-    final String response = await rootBundle.loadString('assets/items.json');
-    final List<dynamic> data = json.decode(response);
-    
-    // Convert the JSON data into a list of Item objects
-    setState(() {
-      items = data.map((item) => Item.fromJson(item)).toList();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: SafeArea(
-        child: items.isEmpty
-            ? const Center(child: CircularProgressIndicator()) // Show a loader until data is loaded
-            : ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return Itemcard(item: items[index]); // Display each item using Itemcard
-                },
+      
+    
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: const DecorationImage(
+                    image: AssetImage("assets/images/01.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      bottom: 10,
+                      left: 10,
+                      child: Container(
+                        color: Colors.black.withOpacity(0.5),
+                        padding: const EdgeInsets.all(4),
+                        child: const Text(
+                          'Wall Arts',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              flex: 1,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.black,
+                        image: const DecorationImage(
+                          image: AssetImage('assets/images/02.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: const Stack(
+                        children: const [
+                          Positioned(
+                            bottom: 10,
+                            left: 10,
+                            child: Text(
+                              'Summer Sale',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/02.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child:const Stack(
+                              children: const [
+                                Positioned(
+                                  bottom: 10,
+                                  left: 10,
+                                  child: Text(
+                                    'White',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.black,
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/03.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child:const Stack(
+                              children: const [
+                                Positioned(
+                                  bottom: 10,
+                                  left: 10,
+                                  child: Text(
+                                    'Black',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

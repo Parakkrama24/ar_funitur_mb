@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/componnets/navBar/navbar.dart';
-import 'package:kmwd/screens/Home.dart';
+import 'package:kmwd/screens/shop.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
 
@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       routes: <String,WidgetBuilder>{
         '/register': (context) => const Register(),
         '/login': (context)=>const Loginscreen(),
-        '/home':(context)=>const Home()
+        '/home':(context)=>const Shop()
       },
       //hghg
     );
