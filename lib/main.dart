@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kmwd/componnets/navBar/navbar.dart';
 import 'package:kmwd/screens/Home.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
@@ -24,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       home:const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4),
-          child:Home()
+          child:Navbar()
         ),
       ),
       routes: <String,WidgetBuilder>{
