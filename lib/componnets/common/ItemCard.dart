@@ -7,7 +7,7 @@ class Itemcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 175,
       width: double.infinity,
       child: Card(

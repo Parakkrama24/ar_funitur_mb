@@ -3,9 +3,13 @@ import 'package:kmwd/componnets/navBar/navbar.dart';
 import 'package:kmwd/screens/shop.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {

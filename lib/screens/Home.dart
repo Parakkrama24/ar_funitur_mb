@@ -65,8 +65,8 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       child: const Stack(
-                        children: const [
-                          Positioned(
+                        children: [
+                          const Positioned(
                             bottom: 10,
                             left: 10,
                             child: Text(
@@ -97,8 +97,8 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             child:const Stack(
-                              children: const [
-                                Positioned(
+                              children: [
+                                const Positioned(
                                   bottom: 10,
                                   left: 10,
                                   child: Text(
@@ -125,8 +125,8 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             child:const Stack(
-                              children: const [
-                                Positioned(
+                              children: [
+                                const Positioned(
                                   bottom: 10,
                                   left: 10,
                                   child: Text(
