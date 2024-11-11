@@ -3,13 +3,15 @@ import 'package:kmwd/screens/Home.dart';
 import 'package:kmwd/screens/shop.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
-import 'package:kmwd/screens/cartpage.dart'; // Import the CartPage
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+// Import the CartPage
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
