@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kmwd/screens/BillingPage.dart';
 import 'package:kmwd/screens/Home.dart';
 import 'package:kmwd/componnets/navBar/navbar.dart';
 import 'package:kmwd/screens/shop.dart';
@@ -39,7 +40,8 @@ class _MyAppState extends State<MyApp> {
       routes: <String, WidgetBuilder>{
         '/register': (context) => const Register(),
         '/login': (context) => const Loginscreen(),
-        '/home': (context) => const Shop()
+        '/home': (context) => const Shop(),
+        '/checkout': (context) => const BillingPage()
       },
     );
   }

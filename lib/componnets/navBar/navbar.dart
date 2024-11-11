@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kmwd/screens/BillingPage.dart';
 import 'package:kmwd/screens/Home.dart';
+import 'package:kmwd/screens/cartpage.dart';
 import 'package:kmwd/screens/shop.dart';
 
 class Navbar extends StatefulWidget {
@@ -15,12 +17,8 @@ class _NavbarState extends State<Navbar> {
   final List<Widget> _screens = [
     const Home(),
     const Shop(),
-    const Center(
-      child: Text("Add"),
-    ),
-    const Center(
-      child: Text("Messages"),
-    ),
+    const CartPage(),
+    const BillingPage()
   ];
 
   void _onItemTapped(int index) {

@@ -9,7 +9,8 @@ class CheckoutButton extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ElevatedButton(
         onPressed: () {
-          // Add checkout functionality
+          Navigator.of(context)
+              .pushNamed("/checkout"); // Navigate to "/register"
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red, // Checkout button color
