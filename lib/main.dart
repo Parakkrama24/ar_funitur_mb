@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:kmwd/screens/Home.dart';
 import 'package:kmwd/componnets/navBar/navbar.dart';
 import 'package:kmwd/screens/shop.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+// Import the CartPage
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -25,14 +31,16 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: const SafeArea(
-        child: Padding(padding: EdgeInsets.all(4), child: Navbar()),
+        child: Padding(
+          padding: EdgeInsets.all(4),
+          child: Navbar(),
+        ),
       ),
       routes: <String, WidgetBuilder>{
         '/register': (context) => const Register(),
         '/login': (context) => const Loginscreen(),
         '/home': (context) => const Shop()
       },
-      //hghg
     );
   }
 }

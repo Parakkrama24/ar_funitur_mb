@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "707272338076",
+    "project_id": "kmwd-3e109",
+    "storage_bucket": "kmwd-3e109.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707272338076:android:ab9957f48c2ff017175b59",
+        "android_client_info": {
+          "package_name": "com.example.kmwd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfqxCgfI2wXEfOEdh626D7_Uh1mSkcnLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -36,7 +36,7 @@ class ItemDetailPage extends StatelessWidget {
               ),
             ),
             Text(
-              '\$${item.description}',
+              '\$${item.name}',
               style: const TextStyle(fontSize: 20, color: Colors.grey),
             ),
             Row(
