@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kmwd/screens/Home.dart';
 import 'package:kmwd/screens/shop.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
@@ -6,14 +7,11 @@ import 'package:kmwd/screens/cartpage.dart'; // Import the CartPage
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
 void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
   runApp(const MyApp());
-
-  
 }
 
 class MyApp extends StatefulWidget {
@@ -33,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       home: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4),
-          child: CartPage(),
+          child: Home(),
         ),
       ),
       routes: {
