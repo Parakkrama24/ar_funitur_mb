@@ -25,7 +25,7 @@ class _ShopState extends State<Shop> {
   Future<void> _loadItems() async {
     final String response = await rootBundle.loadString('assets/items.json');
     final List<dynamic> data = json.decode(response);
-    
+
     // Convert the JSON data into a list of Item objects
     setState(() {
       items = data.map((item) => Item.fromJson(item)).toList();
@@ -40,11 +40,14 @@ class _ShopState extends State<Shop> {
       ),
       body: SafeArea(
         child: items.isEmpty
-            ? const Center(child: CircularProgressIndicator()) // Show a loader until data is loaded
+            ? const Center(
+                child:
+                    CircularProgressIndicator()) // Show a loader until data is loaded
             : ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (context, index) {
-                  return Itemcard(item: items[index]); // Display each item using Itemcard
+                  return Itemcard(
+                      item: items[index]); // Display each item using Itemcard
                 },
               ),
       ),

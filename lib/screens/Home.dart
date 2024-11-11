@@ -6,12 +6,11 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
+
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-    
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -66,7 +65,7 @@ class _HomeState extends State<Home> {
                       ),
                       child: const Stack(
                         children: [
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             left: 10,
                             child: Text(
@@ -96,9 +95,9 @@ class _HomeState extends State<Home> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            child:const Stack(
+                            child: const Stack(
                               children: [
-                                const Positioned(
+                                Positioned(
                                   bottom: 10,
                                   left: 10,
                                   child: Text(
@@ -124,9 +123,9 @@ class _HomeState extends State<Home> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            child:const Stack(
+                            child: const Stack(
                               children: [
-                                const Positioned(
+                                Positioned(
                                   bottom: 10,
                                   left: 10,
                                   child: Text(
