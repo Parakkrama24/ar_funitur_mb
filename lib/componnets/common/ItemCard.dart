@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/models/Item.dart';
+import 'package:kmwd/screens/Item_Screen.dart';
 
 class Itemcard extends StatelessWidget {
   final Item item;
@@ -17,22 +18,30 @@ class Itemcard extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Image.asset(
-                item.image,
-                width: 150,
-                height: 150, // Set the height you want
-                fit: BoxFit.cover,
+              GestureDetector(
+                onTap: () {
+                  // Navigate to item detail page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ItemDetailPage(item: item),
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  item.image,
+                  width: 150,
+                  height: 150, // Set the height you want
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(width: 10),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
-                 
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
-                   
                   children: [
-                    
                     Text(
                       item.name,
                       style: const TextStyle(fontWeight: FontWeight.w400),

@@ -7,10 +7,9 @@ import 'package:kmwd/screens/cartpage.dart'; // Import the CartPage
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-void main() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -34,11 +33,10 @@ class _MyAppState extends State<MyApp> {
           child: Home(),
         ),
       ),
-      routes: {
+      routes: <String, WidgetBuilder>{
         '/register': (context) => const Register(),
         '/login': (context) => const Loginscreen(),
-        '/home': (context) => const Shop(),
-        '/cart': (context) => const CartPage(), // Add the CartPage route
+        '/home': (context) => const Shop()
       },
     );
   }
