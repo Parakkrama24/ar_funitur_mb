@@ -46,9 +46,9 @@ class _NavbarState extends State<Navbar> {
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 202, 29, 6), 
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(20),
-          topRight: Radius.circular(20)), 
+          color: Color.fromARGB(255, 202, 29, 6),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           // Set background color to orange
           boxShadow: [
             BoxShadow(
@@ -59,7 +59,8 @@ class _NavbarState extends State<Navbar> {
           ],
         ),
         child: BottomNavigationBar(
-          backgroundColor: Colors.transparent, // Transparent to show the Container color
+          backgroundColor:
+              Colors.transparent, // Transparent to show the Container color
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
           selectedItemColor: const Color.fromARGB(255, 224, 55, 3),
