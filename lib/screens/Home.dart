@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       child: const Stack(
-                        children: const [
+                        children: [
                           Positioned(
                             bottom: 10,
                             left: 10,
@@ -97,7 +97,7 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             child:const Stack(
-                              children: const [
+                              children: [
                                 Positioned(
                                   bottom: 10,
                                   left: 10,
@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             child:const Stack(
-                              children: const [
+                              children: [
                                 Positioned(
                                   bottom: 10,
                                   left: 10,
