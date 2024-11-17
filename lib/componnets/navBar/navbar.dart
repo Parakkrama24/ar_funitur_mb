@@ -74,7 +74,7 @@ class _NavbarState extends State<Navbar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.category),
-              label: 'Add',
+              label: 'My Bag',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.message),
@@ -90,11 +90,11 @@ class _NavbarState extends State<Navbar> {
   String _getTitle(int index) {
     switch (index) {
       case 0:
-        return 'Home';
+        return 'DecorIt';
       case 1:
         return 'Shop';
       case 2:
-        return 'Add';
+        return 'My Bag';
       case 3:
         return 'Messages';
       default:

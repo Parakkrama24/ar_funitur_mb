@@ -3,18 +3,21 @@
     "name": "Item 1",
     "price": "15.00",
     "image": "assets/images/01.png",
-    "description": "This is a description for Item 1."
+    "description": "This is a description for Item 1.",
+    "category":"A"
   },
   {
     "name": "Item 2",
     "price": "20.00",
     "image": "assets/images/02.png",
-    "description": "This is a description for Item 2."
+    "description": "This is a description for Item 2.",
+    "category":"B"
   },
   {
     "name": "Item 3",
     "price": "25.00",
     "image": "assets/images/03.png",
-    "description": "This is a description for Item 3."
+    "description": "This is a description for Item 3.",
+    "category":"C"
   }
 ]

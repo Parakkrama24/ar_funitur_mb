@@ -70,7 +70,7 @@ flutter:
     - assets/images/01.png
     - assets/images/02.png
     - assets/images/03.png
-    - assets/items.json
+    - assets/item.json
     - assets/images/pullover.png
     - assets/images/tshirt.png
     - assets/images/sportdress.png

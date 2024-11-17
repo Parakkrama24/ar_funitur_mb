@@ -13,10 +13,13 @@ class CheckoutButton extends StatelessWidget {
               .pushNamed("/checkout"); // Navigate to "/register"
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red, // Checkout button color
+          backgroundColor:
+              const Color.fromARGB(255, 235, 46, 29), // Checkout button color
           minimumSize: const Size(double.infinity, 50),
         ),
-        child: const Text('CHECK OUT', style: TextStyle(fontSize: 18)),
+        child: const Text('CHECK OUT',
+            style: TextStyle(
+                fontSize: 18, color: Color.fromARGB(251, 255, 255, 255))),
       ),
     );
   }
