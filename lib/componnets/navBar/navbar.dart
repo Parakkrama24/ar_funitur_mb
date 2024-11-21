@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kmwd/screens/BillingPage.dart';
 import 'package:kmwd/screens/Home.dart';
+import 'package:kmwd/screens/UserDetails.dart';
 import 'package:kmwd/screens/cartpage.dart';
 import 'package:kmwd/screens/shop.dart';
 
@@ -18,7 +18,7 @@ class _NavbarState extends State<Navbar> {
     const Home(),
     const Shop(),
     const CartPage(),
-    const BillingPage()
+    const Userdetails()
   ];
 
   void _onItemTapped(int index) {
