@@ -78,7 +78,7 @@ class _NavbarState extends State<Navbar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.message),
-              label: 'Messages',
+              label: 'Profile',
             ),
           ],
         ),
@@ -96,7 +96,7 @@ class _NavbarState extends State<Navbar> {
       case 2:
         return 'My Bag';
       case 3:
-        return 'Messages';
+        return 'Profile';
       default:
         return '';
     }
