@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kmwd/screens/BillingPage.dart';
 import 'package:kmwd/componnets/navBar/navbar.dart';
 import 'package:kmwd/screens/shop.dart';
+import 'package:kmwd/screens/userDataUpdate.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,7 +41,8 @@ class _MyAppState extends State<MyApp> {
         '/register': (context) => const Register(),
         '/login': (context) => const Loginscreen(),
         '/home': (context) => const Shop(),
-        '/checkout': (context) => const BillingPage()
+        '/checkout': (context) => const BillingPage(),
+        '/updateProfile': (context) => const UpdateUserDetails(),
       },
     );
   }

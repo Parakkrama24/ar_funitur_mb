@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kmwd/componnets/profilePage/UpdareProfileButton.dart';
 
 class Userdetails extends StatefulWidget {
   const Userdetails({super.key});
@@ -86,11 +87,7 @@ class _UserdetailsState extends State<Userdetails> {
                     ],
                   ),
                   const Spacer(),
-                  ElevatedButton(
-                    onPressed: () =>
-                        {}, // Add functionality to update data here
-                    child: const Text('Update Profile'),
-                  ),
+                  Updateprofilebutton()
                 ],
               ),
       ),
