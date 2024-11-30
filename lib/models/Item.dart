@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Item {
   final String name;
   final String price;
   final String image;
   final String description;
   final String category;
+
   Item({
     required this.name,
     required this.price,
@@ -12,12 +15,14 @@ class Item {
     required this.category,
   });
 
-  factory Item.fromJson(Map<String, dynamic> json) {
+  factory Item.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
     return Item(
-        name: json['name'],
-        price: json['price'],
-        image: json['image'],
-        description: json['Description'],
-        category: json['Description']);
+      name: data['name'] ?? '',
+      price: data['price'] ?? '',
+      image: data['image'] ?? '',
+      description: data['description'] ?? '',
+      category: data['category'] ?? '',
+    );
   }
 }

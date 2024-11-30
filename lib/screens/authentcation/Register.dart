@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/styles/Style.dart';
+import 'package:kmwd/Database/auth_service.dart'; // Import the AuthService
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -9,9 +10,41 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController NameController = TextEditingController();
-  TextEditingController EmailController = TextEditingController();
-  TextEditingController PasswordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  final AuthService _authService = AuthService();
+  bool isLoading = false;
+  String? errorMessage;
+
+  void _registerUser() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = null;
+    });
+
+    String? result = await _authService.registerUser(
+      name: nameController.text.trim(),
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (result == null) {
+      // Navigate to the login screen after successful registration
+      Navigator.of(context).pushNamed('/login');
+    } else {
+      // Display error message
+      setState(() {
+        errorMessage = result;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,45 +64,51 @@ class _RegisterState extends State<Register> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                controller: NameController,
+                controller: nameController,
                 decoration: apptextDecoration.main(hinttext_: "Enter Name ..."),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               TextField(
-                controller: EmailController,
-                decoration: apptextDecoration.main(hinttext_: "Enter Email ..."),
+                controller: emailController,
+                decoration:
+                    apptextDecoration.main(hinttext_: "Enter Email ..."),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               TextField(
                 obscureText: true,
-                controller: PasswordController,
-                decoration: apptextDecoration.main(hinttext_: "Enter Password ..."),
-              
+                controller: passwordController,
+                decoration:
+                    apptextDecoration.main(hinttext_: "Enter Password ..."),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
+              if (errorMessage != null)
+                Text(
+                  errorMessage!,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              const SizedBox(height: 15),
               GestureDetector(
                 child: const Text("Already have an account?"),
                 onTap: () => {Navigator.of(context).pushNamed('/login')},
               ),
               const SizedBox(height: 15),
               GestureDetector(
+                onTap: _registerUser,
                 child: Container(
                   height: 50,
                   width: double.infinity,
                   decoration: buttonDecoration.main(color_: Colors.red),
-                  child:const Column(mainAxisAlignment: MainAxisAlignment.center
-                    ,children: [
-                    Text("Sign up", style: TextStyle(fontSize: 20, color: Colors.white),),
-                  ],),
-                
+                  child: isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(color: Colors.white))
+                      : const Center(
+                          child: Text(
+                            "Sign up",
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
                 ),
-              )
+              ),
             ],
           ),
         ),
