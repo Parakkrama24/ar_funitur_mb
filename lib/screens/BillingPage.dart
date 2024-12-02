@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BillingPage extends StatefulWidget {
-  const BillingPage({super.key});
+  final double totalPrice;
+  final double deliveryCharge;
+  final String deliveryDate;
+
+  const BillingPage({
+    super.key,
+    required this.totalPrice,
+    required this.deliveryCharge,
+    required this.deliveryDate,
+  });
 
   @override
   State<BillingPage> createState() => _BillingPageState();
@@ -38,6 +47,9 @@ class _BillingPageState extends State<BillingPage> {
         'cardHolderName': cardHolderNameController.text,
         'timestamp':
             FieldValue.serverTimestamp(), // To store the time of submission
+        'totalPrice': widget.totalPrice,
+        'deliveryCharge': widget.deliveryCharge,
+        'deliveryDate': widget.deliveryDate,
       };
 
       try {
@@ -93,6 +105,24 @@ class _BillingPageState extends State<BillingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Display total cost, delivery charge, and delivery date
+              Text(
+                'Total Cost: \$${widget.totalPrice.toStringAsFixed(2)}',
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Delivery Charge: \$${widget.deliveryCharge.toStringAsFixed(2)}',
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Delivery Date: ${widget.deliveryDate}',
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+              const SizedBox(height: 32),
+
               // Card Number
               TextFormField(
                 controller: cardNumberController,

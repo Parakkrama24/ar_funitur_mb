@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/styles/Style.dart';
 import 'package:kmwd/Database/auth_service.dart'; // Import the AuthService
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class OtherDetails extends StatefulWidget {
+  const OtherDetails({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<OtherDetails> createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterState extends State<OtherDetails> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController homeNumberController = TextEditingController();
+  TextEditingController landmarkController = TextEditingController();
+  TextEditingController laneController = TextEditingController();
+  TextEditingController dobController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   final AuthService _authService = AuthService();
   bool isLoading = false;
@@ -24,15 +30,26 @@ class _RegisterState extends State<Register> {
       errorMessage = null;
     });
 
+    // Capture user details
+    String name = nameController.text.trim();
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    String homeNumber = homeNumberController.text.trim();
+    String landmark = landmarkController.text.trim();
+    String lane = laneController.text.trim();
+    String dob = dobController.text.trim();
+    String phone = phoneController.text.trim();
+
+    // Call AuthService to register the user with all details
     String? result = await _authService.registerUser(
-      name: nameController.text.trim(),
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-      homeNumber: '',
-      landmark: '',
-      lane: '',
-      dob: '',
-      phone: '',
+      name: name,
+      email: email,
+      password: password,
+      homeNumber: homeNumber,
+      landmark: landmark,
+      lane: lane,
+      dob: dob,
+      phone: phone,
     );
 
     setState(() {
@@ -41,7 +58,7 @@ class _RegisterState extends State<Register> {
 
     if (result == null) {
       // Navigate to the login screen after successful registration
-      Navigator.of(context).pushNamed('/otherDetails');
+      Navigator.of(context).pushNamed('/login');
     } else {
       // Display error message
       setState(() {
@@ -56,7 +73,7 @@ class _RegisterState extends State<Register> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          "Register",
+          "Details",
           style: TextStyle(fontSize: 40),
         ),
       ),
@@ -84,6 +101,35 @@ class _RegisterState extends State<Register> {
                 controller: passwordController,
                 decoration:
                     apptextDecoration.main(hinttext_: "Enter Password ..."),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: homeNumberController,
+                decoration:
+                    apptextDecoration.main(hinttext_: "Enter Home Number ..."),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: landmarkController,
+                decoration:
+                    apptextDecoration.main(hinttext_: "Enter Landmark ..."),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: laneController,
+                decoration: apptextDecoration.main(hinttext_: "Enter Lane ..."),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: dobController,
+                decoration: apptextDecoration.main(
+                    hinttext_: "Enter DOB (e.g. 23rd Dec, 1990) ..."),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: phoneController,
+                decoration:
+                    apptextDecoration.main(hinttext_: "Enter Phone Number ..."),
               ),
               const SizedBox(height: 15),
               if (errorMessage != null)

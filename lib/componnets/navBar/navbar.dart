@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/screens/Home.dart';
 import 'package:kmwd/screens/UserDetails.dart';
-import 'package:kmwd/screens/cartpage.dart';
+// import 'package:kmwd/screens/cartpage.dart';
 import 'package:kmwd/screens/shop.dart';
+import 'package:kmwd/screens/cart_page.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
