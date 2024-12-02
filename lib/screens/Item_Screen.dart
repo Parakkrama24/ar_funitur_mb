@@ -54,8 +54,21 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             Center(
               child: Column(
                 children: [
-                  Image.network(widget.item.image, height: 200),
+                  // Image with shadow
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Image.network(widget.item.image, height: 200),
+                  ),
                   const SizedBox(height: 16),
+                  // Item Name
                   Text(
                     widget.item.name,
                     style: const TextStyle(
@@ -65,6 +78,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   const Text("NIKE",
                       style: TextStyle(fontSize: 16, color: Colors.grey)),
                   const SizedBox(height: 8),
+                  // Item Price
                   Text('\$${widget.item.price}',
                       style: const TextStyle(fontSize: 20)),
                 ],
@@ -74,8 +88,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             // Size Selection
             const Text("Size",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Wrap(
+              spacing: 12,
               children: ["S", "M", "L", "XL", "XXL"]
                   .map((size) => ChoiceChip(
                         label: Text(size),
@@ -92,8 +106,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             // Kit Selection
             const Text("Kit",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Wrap(
+              spacing: 12,
               children: ["HOME", "AWAY", "THIRD"]
                   .map((kit) => ChoiceChip(
                         label: Text(kit),
@@ -139,8 +153,25 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                    onPressed: addToCart, child: const Text("Add to Cart")),
-                ElevatedButton(onPressed: () {}, child: const Text("Checkout")),
+                  onPressed: addToCart,
+                  child: const Text("Add to Cart"),
+                  style: ElevatedButton.styleFrom(
+                    elevation: 5, // Adding shadow
+                    shadowColor: Colors.black.withOpacity(0.2),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 12),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Checkout"),
+                  style: ElevatedButton.styleFrom(
+                    elevation: 5, // Adding shadow
+                    shadowColor: Colors.black.withOpacity(0.2),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 12),
+                  ),
+                ),
               ],
             ),
           ],
