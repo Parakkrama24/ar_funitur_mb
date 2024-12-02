@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kmwd/models/Item.dart';
 import 'package:kmwd/componnets/common/ItemCard.dart';
 
@@ -13,8 +13,8 @@ class Shop extends StatefulWidget {
 
 class _ShopState extends State<Shop> with SingleTickerProviderStateMixin {
   late List<Item> items = [];
-  late List<String> categories = []; // Store unique categories
-  late TabController _tabController; // For tab navigation
+  late List<String> categories = [];
+  late TabController _tabController;
   bool isLoading = true;
   String errorMessage = '';
 
@@ -26,15 +26,13 @@ class _ShopState extends State<Shop> with SingleTickerProviderStateMixin {
 
   Future<void> _loadItems() async {
     try {
-      final String response = await rootBundle.loadString('assets/item.json');
-      final List<dynamic> data = json.decode(response);
-
+      final snapshot = await FirebaseFirestore.instance.collection('items').get();
       setState(() {
-        items = data.map((item) => Item.fromJson(item)).toList();
+        items = snapshot.docs.map((doc) => Item.fromFirestore(doc)).toList();
         categories = [
           'All',
-          ..._getCategories(items)
-        ]; // Add "All" to the categories
+          ..._getCategories(items),
+        ];
         _tabController = TabController(length: categories.length, vsync: this);
         isLoading = false;
       });
@@ -47,7 +45,6 @@ class _ShopState extends State<Shop> with SingleTickerProviderStateMixin {
   }
 
   List<String> _getCategories(List<Item> items) {
-    // Extract unique categories from items
     return items.map((item) => item.category).toSet().toList();
   }
 
@@ -95,7 +92,6 @@ class _ShopState extends State<Shop> with SingleTickerProviderStateMixin {
                     controller: _tabController,
                     children: categories.map((category) {
                       final filteredItems = _filterItemsByCategory(category);
-
                       return filteredItems.isEmpty
                           ? const Center(
                               child: Text(
@@ -109,9 +105,7 @@ class _ShopState extends State<Shop> with SingleTickerProviderStateMixin {
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 12),
-                                  child: Itemcard(
-                                    item: filteredItems[index],
-                                  ),
+                                  child: ItemCard(item: filteredItems[index]),
                                 );
                               },
                             );

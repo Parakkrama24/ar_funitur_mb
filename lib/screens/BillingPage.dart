@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BillingPage extends StatefulWidget {
   const BillingPage({super.key});
@@ -27,11 +28,32 @@ class _BillingPageState extends State<BillingPage> {
     super.dispose();
   }
 
-  void _onProceed() {
+  void _onProceed() async {
     if (_formKey.currentState?.validate() == true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Proceeding with payment...')),
-      );
+      // Create a billing record
+      final billingData = {
+        'cardNumber': cardNumberController.text,
+        'expiryDate': expiryDateController.text,
+        'cvv': cvvController.text,
+        'cardHolderName': cardHolderNameController.text,
+        'timestamp':
+            FieldValue.serverTimestamp(), // To store the time of submission
+      };
+
+      try {
+        // Save to Firestore
+        await FirebaseFirestore.instance.collection('billing').add(billingData);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content:
+                  Text('Billing details saved. Proceeding with payment...')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to save billing details: $e')),
+        );
+      }
     }
   }
 
@@ -150,6 +172,7 @@ class _BillingPageState extends State<BillingPage> {
                 controller: cardHolderNameController,
                 decoration: InputDecoration(
                   labelText: 'Cardholder Name',
+                  hintText: 'John Doe',
                   prefixIcon: const Icon(Icons.person),
                   filled: true,
                   fillColor: Colors.white,
@@ -164,25 +187,13 @@ class _BillingPageState extends State<BillingPage> {
                   return null;
                 },
               ),
-              const Spacer(),
+              const SizedBox(height: 32),
 
               // Proceed Button
-              SizedBox(
-                width: double.infinity,
+              Center(
                 child: ElevatedButton(
                   onPressed: _onProceed,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    backgroundColor: Colors.deepOrange,
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text(
-                    'Proceed',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                  child: const Text('Proceed'),
                 ),
               ),
             ],

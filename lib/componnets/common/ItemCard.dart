@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kmwd/models/Item.dart';
 import 'package:kmwd/screens/Item_Screen.dart';
 
-class Itemcard extends StatelessWidget {
+class ItemCard extends StatelessWidget {
   final Item item;
-  const Itemcard({super.key, required this.item});
+  const ItemCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,8 @@ class Itemcard extends StatelessWidget {
                     ),
                   );
                 },
-                child: Image.asset(
-                  item.image,
+                child: Image.network(
+                  item.image, // Using network to load the image
                   width: 150,
                   height: 150, // Set the height you want
                   fit: BoxFit.cover,
