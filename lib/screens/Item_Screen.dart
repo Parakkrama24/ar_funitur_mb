@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/models/Item.dart';
+import 'package:kmwd/componnets/cart/CartItem.dart';
+import 'cart_page.dart';
 
 class ItemDetailPage extends StatefulWidget {
   final Item item;
+
   const ItemDetailPage({super.key, required this.item});
 
   @override
@@ -14,6 +17,18 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   String selectedKit = "HOME"; // Default selected kit
   int quantity = 1; // Default quantity
 
+  void addToCart() {
+    Cart.addItem(widget.item, selectedSize, selectedKit, quantity);
+
+    // Show confirmation
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("${widget.item.name} added to cart!"),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +37,10 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
         actions: [
           IconButton(
             onPressed: () {
-              // Open Cart Action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartPage()),
+              );
             },
             icon: const Icon(Icons.shopping_cart),
           ),
@@ -36,40 +54,26 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             Center(
               child: Column(
                 children: [
-                  Image.network(
-                    widget.item.image,
-                    height: 200,
-                  ),
+                  Image.network(widget.item.image, height: 200),
                   const SizedBox(height: 16),
                   Text(
                     widget.item.name,
                     style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: 24, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                  const Text(
-                    "NIKE",
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
-                  ),
+                  const Text("NIKE",
+                      style: TextStyle(fontSize: 16, color: Colors.grey)),
                   const SizedBox(height: 8),
-                  Text(
-                    '\$${widget.item.price}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  Text('\$${widget.item.price}',
+                      style: const TextStyle(fontSize: 20)),
                 ],
               ),
             ),
             const SizedBox(height: 24),
             // Size Selection
-            const Text(
-              "Size",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            const Text("Size",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: ["S", "M", "L", "XL", "XXL"]
@@ -86,10 +90,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             ),
             const SizedBox(height: 24),
             // Kit Selection
-            const Text(
-              "Kit",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            const Text("Kit",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: ["HOME", "AWAY", "THIRD"]
@@ -106,12 +108,9 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             ),
             const SizedBox(height: 24),
             // Quantity Selector
-            const Text(
-              "Qty",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            const Text("Qty",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 IconButton(
                   onPressed: () {
@@ -123,10 +122,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   },
                   icon: const Icon(Icons.remove),
                 ),
-                Text(
-                  quantity.toString(),
-                  style: const TextStyle(fontSize: 18),
-                ),
+                Text(quantity.toString(), style: const TextStyle(fontSize: 18)),
                 IconButton(
                   onPressed: () {
                     setState(() {
@@ -143,17 +139,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  child: const Text("Add to Cart"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Checkout action
-                  },
-                  child: const Text("Checkout"),
-                ),
+                    onPressed: addToCart, child: const Text("Add to Cart")),
+                ElevatedButton(onPressed: () {}, child: const Text("Checkout")),
               ],
             ),
           ],
