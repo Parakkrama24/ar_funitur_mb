@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/componnets/cart/CartItem.dart';
+import 'package:kmwd/screens/BillingPage.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -79,7 +80,15 @@ class CartPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // Implement checkout action
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BillingPage(
+                      totalPrice: Cart.totalPrice,
+                      deliveryCharge: 5.0, // Assume a fixed delivery charge
+                      deliveryDate: "2024-12-15", // Example delivery date
+                    ),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 padding:

@@ -41,7 +41,11 @@ class _MyAppState extends State<MyApp> {
         '/register': (context) => const Register(),
         '/login': (context) => const Loginscreen(),
         '/home': (context) => const Shop(),
-        '/checkout': (context) => const BillingPage(),
+        '/checkout': (context) => const BillingPage(
+              totalPrice: 100,
+              deliveryCharge: 100,
+              deliveryDate: 'gggg',
+            ),
         '/updateProfile': (context) => const UpdateUserDetails(),
         '/navBar': (context) => const Navbar(),
       },
