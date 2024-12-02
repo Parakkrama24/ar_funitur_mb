@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Item {
   final String name;
-  final String price;
+  final double price;
   final String image;
   final String description;
   final String category;
