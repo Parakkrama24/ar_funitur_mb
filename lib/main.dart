@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
       home: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4),
-          child: BillingPage(),
+          child: Loginscreen(),
         ),
       ),
       routes: <String, WidgetBuilder>{
@@ -43,6 +43,7 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => const Shop(),
         '/checkout': (context) => const BillingPage(),
         '/updateProfile': (context) => const UpdateUserDetails(),
+        '/navBar': (context) => const Navbar(),
       },
     );
   }

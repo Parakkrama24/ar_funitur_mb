@@ -15,11 +15,6 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Container(
-              height: 50,
-              width: double.infinity,
-              color: Colors.black,
-            ),
             Expanded(
               flex: 2,
               child: Container(

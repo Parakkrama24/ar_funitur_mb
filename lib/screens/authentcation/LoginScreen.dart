@@ -26,7 +26,7 @@ class _LoginscreenState extends State<Loginscreen> {
         password: passwordController.text.trim(),
       );
       // Navigate to the Home page if login is successful
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushReplacementNamed('/navBar');
     } catch (e) {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
