@@ -28,6 +28,11 @@ class _RegisterState extends State<Register> {
       name: nameController.text.trim(),
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
+      homeNumber: '',
+      landmark: '',
+      lane: '',
+      dob: '',
+      phone: '',
     );
 
     setState(() {
