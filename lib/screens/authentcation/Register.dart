@@ -39,15 +39,10 @@ class _RegisterState extends State<Register> {
       isLoading = false;
     });
 
-    if (result == null) {
-      // Navigate to the login screen after successful registration
-      Navigator.of(context).pushNamed('/otherDetails');
-    } else {
-      // Display error message
-      setState(() {
-        errorMessage = result;
-      });
-    }
+    // Display error message
+    setState(() {
+      errorMessage = result;
+    });
   }
 
   @override

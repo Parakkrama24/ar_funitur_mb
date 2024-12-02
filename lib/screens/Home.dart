@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomePageState extends State<Home> {
   late int unreadNotificationsCount = 0; // Track unread notifications count
-  
+
   @override
   void initState() {
     super.initState();
@@ -26,10 +26,11 @@ class _HomePageState extends State<Home> {
         .where('isRead', isEqualTo: false) // Check unread notifications
         .get()
         .then((querySnapshot) {
-          setState(() {
-            unreadNotificationsCount = querySnapshot.size; // Set unread notification count
-          });
-        });
+      setState(() {
+        unreadNotificationsCount =
+            querySnapshot.size; // Set unread notification count
+      });
+    });
   }
 
   // Method to mark a notification as read
@@ -38,8 +39,8 @@ class _HomePageState extends State<Home> {
         .collection('notification')
         .doc(docId)
         .update({'isRead': true}).then((value) {
-          _getUnreadNotificationsCount(); // Update the unread count after marking as read
-        });
+      _getUnreadNotificationsCount(); // Update the unread count after marking as read
+    });
 
     Fluttertoast.showToast(msg: "Notification marked as read!");
   }
@@ -49,7 +50,7 @@ class _HomePageState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 204, 16, 16),
         actions: [
           // Notification icon with count indicator
           Stack(
@@ -59,7 +60,8 @@ class _HomePageState extends State<Home> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const NotificationsPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const NotificationsPage()),
                   );
                 },
               ),
@@ -80,7 +82,8 @@ class _HomePageState extends State<Home> {
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('notification').snapshots(),
+        stream:
+            FirebaseFirestore.instance.collection('notification').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -102,14 +105,16 @@ class _HomePageState extends State<Home> {
             itemBuilder: (context, index) {
               final notification = notifications[index];
               final title = notification['title'] ?? 'No Title';
-              final description = notification['description'] ?? 'No Description';
+              final description =
+                  notification['description'] ?? 'No Description';
               final type = notification['type'] ?? 'General';
               final orderId = notification['orderId'] ?? '';
 
               return Card(
                 margin: const EdgeInsets.all(10),
                 child: ListTile(
-                  leading: Image.asset('assets/notification_icon.png'), // Image for the notification
+                  leading: Image.asset(
+                      'assets/images/sportdress.png'), // Image for the notification
                   title: Text(title),
                   subtitle: Text(description),
                   trailing: type == 'Order Tracking'
@@ -118,14 +123,16 @@ class _HomePageState extends State<Home> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => OrderTrackingPage(orderId: orderId),
+                                builder: (context) =>
+                                    OrderTrackingPage(orderId: orderId),
                               ),
                             );
                           },
                           child: const Text('Track Order'),
                         )
                       : null,
-                  onTap: () => _markAsRead(notification.id), // Mark as read on tap
+                  onTap: () =>
+                      _markAsRead(notification.id), // Mark as read on tap
                 ),
               );
             },
@@ -151,7 +158,8 @@ class OrderTrackingPage extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       body: FutureBuilder<DocumentSnapshot>(
-        future: FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
+        future:
+            FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -175,12 +183,14 @@ class OrderTrackingPage extends StatelessWidget {
               children: [
                 Text(
                   'Order ID: $orderId',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 Text('Status: ${orderData['status'] ?? 'Unknown'}'),
                 const SizedBox(height: 10),
-                Text('Estimated Delivery: ${orderData['estimatedDelivery'] ?? 'Unknown'}'),
+                Text(
+                    'Estimated Delivery: ${orderData['estimatedDelivery'] ?? 'Unknown'}'),
                 const SizedBox(height: 10),
                 Text(
                   'Items: ${orderData['items'] != null && orderData['items'] is List ? (orderData['items'] as List).join(', ') : 'No items listed.'}',
