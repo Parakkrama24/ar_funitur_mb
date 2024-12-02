@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/screens/BillingPage.dart';
 import 'package:kmwd/componnets/navBar/navbar.dart';
+import 'package:kmwd/screens/authentcation/otherDetails.dart';
 import 'package:kmwd/screens/shop.dart';
 import 'package:kmwd/screens/userDataUpdate.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
@@ -48,6 +49,7 @@ class _MyAppState extends State<MyApp> {
             ),
         '/updateProfile': (context) => const UpdateUserDetails(),
         '/navBar': (context) => const Navbar(),
+        '/otherDetails': (context) => const OtherDetails(),
       },
     );
   }

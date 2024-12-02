@@ -99,7 +99,6 @@ class _ShopState extends State<Shop> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shop'),
         bottom: isLoading || errorMessage.isNotEmpty
             ? null
             : TabBar(

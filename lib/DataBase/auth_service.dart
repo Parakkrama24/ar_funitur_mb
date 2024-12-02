@@ -10,6 +10,11 @@ class AuthService {
     required String name,
     required String email,
     required String password,
+    required String homeNumber,
+    required String landmark,
+    required String lane,
+    required String dob,
+    required String phone,
   }) async {
     try {
       // Create user in Firebase Auth
