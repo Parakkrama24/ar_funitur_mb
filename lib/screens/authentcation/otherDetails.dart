@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/styles/Style.dart';
 import 'package:kmwd/Database/auth_service.dart'; // Import the AuthService
+// Import Firestore
 
 class OtherDetails extends StatefulWidget {
   const OtherDetails({super.key});
@@ -12,6 +13,7 @@ class OtherDetails extends StatefulWidget {
 class _RegisterState extends State<OtherDetails> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   TextEditingController homeNumberController = TextEditingController();
   TextEditingController landmarkController = TextEditingController();
   TextEditingController laneController = TextEditingController();
@@ -31,6 +33,7 @@ class _RegisterState extends State<OtherDetails> {
     // Capture user details
     String name = nameController.text.trim();
     String email = emailController.text.trim();
+    String password = passwordController.text.trim();
     String homeNumber = homeNumberController.text.trim();
     String landmark = landmarkController.text.trim();
     String lane = laneController.text.trim();
@@ -41,12 +44,12 @@ class _RegisterState extends State<OtherDetails> {
     String? result = await _authService.registerUser(
       name: name,
       email: email,
+      password: password,
       homeNumber: homeNumber,
       landmark: landmark,
       lane: lane,
       dob: dob,
       phone: phone,
-      password: '',
     );
 
     setState(() {
@@ -57,6 +60,10 @@ class _RegisterState extends State<OtherDetails> {
     setState(() {
       errorMessage = result;
     });
+    // If registration is successful, navigate to login
+    if (result == null) {
+      Navigator.of(context).pushReplacementNamed('/login');
+    }
   }
 
   @override
@@ -86,6 +93,13 @@ class _RegisterState extends State<OtherDetails> {
                 controller: emailController,
                 decoration:
                     apptextDecoration.main(hinttext_: "Enter Email ..."),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                obscureText: true,
+                controller: passwordController,
+                decoration:
+                    apptextDecoration.main(hinttext_: "Enter Password ..."),
               ),
               const SizedBox(height: 10),
               TextField(
@@ -139,7 +153,7 @@ class _RegisterState extends State<OtherDetails> {
                           child: CircularProgressIndicator(color: Colors.white))
                       : const Center(
                           child: Text(
-                            "Sign up",
+                            "Compleete",
                             style: TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ),

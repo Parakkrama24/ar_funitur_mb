@@ -91,7 +91,7 @@ class _NavbarState extends State<Navbar> {
       case 1:
         return 'Shop';
       case 2:
-        return 'My Bag';
+        return 'Cart';
       case 3:
         return 'Profile';
       default:

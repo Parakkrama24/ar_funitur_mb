@@ -40,8 +40,14 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cart"),
-        backgroundColor: Colors.black,
+        title: const Text(
+          "Cart",
+          style: TextStyle(
+            color: Colors.white, // Replace with your font family name
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 214, 9, 9),
+        centerTitle: true,
       ),
       body: FutureBuilder<List<CartItem>>(
         future: _fetchCartItems(),

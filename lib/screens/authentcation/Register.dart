@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kmwd/screens/authentcation/otherDetails.dart';
 import 'package:kmwd/styles/Style.dart';
 import 'package:kmwd/Database/auth_service.dart'; // Import the AuthService
 
@@ -39,10 +40,18 @@ class _RegisterState extends State<Register> {
       isLoading = false;
     });
 
-    // Display error message
-    setState(() {
-      errorMessage = result;
-    });
+    // If registration is successful, navigate to the next page (OtherDetails)
+    if (result == null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const OtherDetails()),
+      );
+    } else {
+      // Display error message if registration failed
+      setState(() {
+        errorMessage = result;
+      });
+    }
   }
 
   @override
@@ -101,8 +110,8 @@ class _RegisterState extends State<Register> {
                   ),
                   const SizedBox(height: 15),
                   if (errorMessage != null)
-                    Text(
-                      errorMessage!,
+                    const Text(
+                      "Incorect Inputs",
                       style: const TextStyle(color: Colors.red),
                     ),
                   const SizedBox(height: 15),

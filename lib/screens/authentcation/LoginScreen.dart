@@ -93,7 +93,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 GestureDetector(
                   child: const Text("Don’t have an account?"),
                   onTap: () {
-                    Navigator.of(context).pushNamed('/register');
+                    Navigator.of(context).pushNamed('/otherDetails');
                   },
                 ),
                 const SizedBox(height: 15),
