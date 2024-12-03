@@ -123,7 +123,7 @@ class _CartPageState extends State<CartPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BillingPage(
+                builder: (context) => const BillingPage(
                     totalPrice: 122, // Update with actual value
                     deliveryCharge: 122, // Update with actual value
                     deliveryDate: "gdhd")), // Update with actual value
