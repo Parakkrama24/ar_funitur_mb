@@ -76,7 +76,7 @@ class _RegisterState extends State<Register> {
           // Main content
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: SizedBox(
+            child: Container(
               height: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
