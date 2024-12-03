@@ -11,34 +11,25 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  late Future<List<CartItem>> _cartItems;
-  late Future<double> _totalPrice;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  @override
-  void initState() {
-    super.initState();
-    _cartItems = Cart.fetchItems();
-    _totalPrice = Cart.getTotalPrice();
+  Future<List<CartItem>> _fetchCartItems() async {
+    return Cart.fetchItems();
   }
 
-  // Function to remove item from Firebase and local cart
-  Future<void> _removeItemFromCart(CartItem cartItem, int index) async {
-    // Remove item from Firebase
+  Future<double> _calculateTotalPrice() async {
+    return Cart.getTotalPrice();
+  }
+
+  // Function to remove item from Firebase and refresh the cart
+  Future<void> _removeItemFromCart(CartItem cartItem) async {
     try {
-      // Assuming each CartItem has a unique 'id' stored in Firestore
-      await _firestore.collection('cartItems').doc(cartItem.id).delete();
-
-      // Remove item from local cart list
-      setState(() {
-        _cartItems = Cart.fetchItems(); // Refresh cart items
-      });
-
+      await _firestore.collection('cart_items').doc(cartItem.id).delete();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("${cartItem.item.name} removed from cart")),
       );
+      setState(() {}); // Refresh the UI after removal
     } catch (e) {
-      // Handle any errors that occur during Firebase deletion
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Error removing item: ${e.toString()}")),
       );
@@ -49,10 +40,11 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        title: const Text("Cart"),
+        backgroundColor: Colors.black,
       ),
       body: FutureBuilder<List<CartItem>>(
-        future: _cartItems,
+        future: _fetchCartItems(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -62,6 +54,14 @@ class _CartPageState extends State<CartPage> {
           }
 
           final cartItems = snapshot.data ?? [];
+          if (cartItems.isEmpty) {
+            return const Center(
+              child: Text(
+                "Your cart is empty.",
+                style: TextStyle(fontSize: 18),
+              ),
+            );
+          }
 
           return Column(
             children: [
@@ -71,30 +71,33 @@ class _CartPageState extends State<CartPage> {
                   itemBuilder: (context, index) {
                     final cartItem = cartItems[index];
                     return Dismissible(
-                      key: Key(cartItem.item.name), // Ensure unique key
+                      key: Key(cartItem.id), // Unique key for each item
                       direction: DismissDirection.startToEnd,
                       onDismissed: (direction) {
-                        // Remove item from cart (both locally and Firebase)
-                        _removeItemFromCart(cartItem, index);
+                        _removeItemFromCart(cartItem);
                       },
                       background: Container(
                         color: Colors.red,
                         child: const Icon(Icons.delete, color: Colors.white),
                       ),
                       child: ListTile(
-                        leading: Image.network(cartItem.item.image,
-                            width: 50, height: 50, fit: BoxFit.cover),
+                        leading: Image.network(
+                          cartItem.item.image,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
                         title: Text(cartItem.item.name),
                         subtitle: Text("${cartItem.size} - ${cartItem.kit}"),
                         trailing: Text(
-                            "\$${cartItem.item.price * cartItem.quantity}"),
+                            "\$${(cartItem.item.price * cartItem.quantity).toStringAsFixed(2)}"),
                       ),
                     );
                   },
                 ),
               ),
               FutureBuilder<double>(
-                future: _totalPrice,
+                future: _calculateTotalPrice(),
                 builder: (context, totalSnapshot) {
                   if (totalSnapshot.connectionState ==
                       ConnectionState.waiting) {
@@ -107,8 +110,10 @@ class _CartPageState extends State<CartPage> {
                   final totalPrice = totalSnapshot.data ?? 0.0;
                   return Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text("Total: \$${totalPrice.toStringAsFixed(2)}",
-                        style: const TextStyle(fontSize: 20)),
+                    child: Text(
+                      "Total: \$${totalPrice.toStringAsFixed(2)}",
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   );
                 },
               ),
@@ -122,10 +127,12 @@ class _CartPageState extends State<CartPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const BillingPage(
-                    totalPrice: 122, // Update with actual value
-                    deliveryCharge: 122, // Update with actual value
-                    deliveryDate: "gdhd")), // Update with actual value
+              builder: (context) => const BillingPage(
+                totalPrice: 122, // Replace with actual value
+                deliveryCharge: 122, // Replace with actual value
+                deliveryDate: "dd/MM/yyyy", // Replace with actual value
+              ),
+            ),
           );
         },
         child: const Icon(Icons.payment),

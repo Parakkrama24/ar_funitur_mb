@@ -8,9 +8,16 @@ class Cart {
   static Future<List<CartItem>> fetchItems() async {
     try {
       final snapshot = await _firestore.collection('cart_items').get();
-      return snapshot.docs
-          .map((doc) => CartItem.fromFirestore(doc.data()))
-          .toList();
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        return CartItem(
+          id: doc.id, // Use the document ID as the CartItem ID
+          item: Item.fromMap(data['item']),
+          size: data['size'],
+          kit: data['kit'],
+          quantity: data['quantity'],
+        );
+      }).toList();
     } catch (e) {
       print("Error fetching items: $e");
       return [];
@@ -22,23 +29,13 @@ class Cart {
       Item item, String size, String kit, int quantity) async {
     try {
       await _firestore.collection('cart_items').add({
-        'item': item
-            .toMap(), // Assuming Item has a toMap() method to convert it to a Map
+        'item': item.toMap(),
         'size': size,
         'kit': kit,
         'quantity': quantity,
       });
     } catch (e) {
       print("Error adding item to cart: $e");
-    }
-  }
-
-  // Remove item from Firestore
-  static Future<void> removeItem(String documentId) async {
-    try {
-      await _firestore.collection('cart_items').doc(documentId).delete();
-    } catch (e) {
-      print("Error removing item from cart: $e");
     }
   }
 
@@ -49,8 +46,7 @@ class Cart {
       double total = 0;
       for (var doc in snapshot.docs) {
         var itemData = doc['item'];
-        var price =
-            itemData['price']; // Assuming price is stored in the 'item' map
+        var price = itemData['price'];
         var quantity = doc['quantity'];
         total += price * quantity;
       }
@@ -61,6 +57,9 @@ class Cart {
     }
   }
 }
+
+
+
 
 class CartItem {
   final String id;
@@ -77,15 +76,14 @@ class CartItem {
     required this.quantity,
   });
 
-  // Convert CartItem from Firestore data
-  factory CartItem.fromFirestore(Map<String, dynamic> data) {
+  factory CartItem.fromFirestore(Map<String, dynamic> data, String docId) {
     return CartItem(
-      id: data['id'] ?? '',
-      item: Item.fromMap(data[
-          'item']), // Assuming Item has a fromMap() method to create an Item from a Map
+      id: docId,
+      item: Item.fromMap(data['item']),
       size: data['size'],
       kit: data['kit'],
       quantity: data['quantity'],
     );
   }
 }
+
