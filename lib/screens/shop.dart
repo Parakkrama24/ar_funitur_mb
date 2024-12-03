@@ -110,6 +110,7 @@ class _ShopState extends State<Shop> with SingleTickerProviderStateMixin {
                   );
                 }).toList(),
               ),
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Column(

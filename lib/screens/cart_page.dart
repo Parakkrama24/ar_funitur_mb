@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kmwd/models/Item.dart';
 import 'package:kmwd/componnets/cart/CartItem.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kmwd/screens/BillingPage.dart'; // Import your checkout page
@@ -122,7 +123,7 @@ class _CartPageState extends State<CartPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const BillingPage(
+                builder: (context) => BillingPage(
                     totalPrice: 122, // Update with actual value
                     deliveryCharge: 122, // Update with actual value
                     deliveryDate: "gdhd")), // Update with actual value
