@@ -10,12 +10,17 @@ class OrderTrackingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order Tracking'),
-        backgroundColor: Colors.black,
+        title: const Text('Order Tracking',
+            style: TextStyle(
+              color: Colors.white, // Replace with your font family name
+            )),
+        backgroundColor: const Color.fromARGB(255, 204, 16, 16),
+        centerTitle: true,
       ),
       body: FutureBuilder<DocumentSnapshot>(
         // Query the 'orders' collection and the document with the provided orderId
-        future: FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
+        future:
+            FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -42,12 +47,14 @@ class OrderTrackingPage extends StatelessWidget {
               children: [
                 Text(
                   'Order ID: $orderId',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 Text('Status: ${orderData['status'] ?? 'Unknown'}'),
                 const SizedBox(height: 10),
-                Text('Estimated Delivery: ${orderData['estimatedDelivery'] ?? 'Unknown'}'),
+                Text(
+                    'Estimated Delivery: ${orderData['estimatedDelivery'] ?? 'Unknown'}'),
                 const SizedBox(height: 10),
                 Text(
                   'Items: ${orderData['items'] != null && orderData['items'] is List ? (orderData['items'] as List).join(', ') : 'No items listed.'}',

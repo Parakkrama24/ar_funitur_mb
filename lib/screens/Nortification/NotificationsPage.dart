@@ -9,11 +9,17 @@ class NotificationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notifications'),
-        backgroundColor: Colors.black,
+        title: const Text('Notifications',
+            style: TextStyle(
+              color: Colors.white, // Replace with your font family name
+            )),
+        backgroundColor: const Color.fromARGB(255, 204, 16, 16),
+        automaticallyImplyLeading: true,
+        centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('notification').snapshots(),
+        stream:
+            FirebaseFirestore.instance.collection('notification').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -45,7 +51,8 @@ class NotificationsPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => OrderTrackingPage(orderId: notification['orderId']),
+                              builder: (context) => OrderTrackingPage(
+                                  orderId: notification['orderId']),
                             ),
                           );
                         },
@@ -59,7 +66,9 @@ class NotificationsPage extends StatelessWidget {
                       .doc(notification.id)
                       .update({'isRead': true});
                 },
-                tileColor: isRead ? Colors.white : Colors.yellow[100], // Highlight unread notifications
+                tileColor: isRead
+                    ? Colors.white
+                    : Colors.yellow[100], // Highlight unread notifications
               );
             },
           );
