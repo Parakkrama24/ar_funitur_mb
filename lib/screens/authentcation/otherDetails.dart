@@ -75,93 +75,121 @@ class _RegisterState extends State<OtherDetails> {
           "Details",
           style: TextStyle(fontSize: 40),
         ),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Container(
-          height: double.infinity,
-          color: Colors.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: apptextDecoration.main(hinttext_: "Enter Name ..."),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: emailController,
-                decoration:
-                    apptextDecoration.main(hinttext_: "Enter Email ..."),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration:
-                    apptextDecoration.main(hinttext_: "Enter Password ..."),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: homeNumberController,
-                decoration:
-                    apptextDecoration.main(hinttext_: "Enter Home Number ..."),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: landmarkController,
-                decoration:
-                    apptextDecoration.main(hinttext_: "Enter Landmark ..."),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: laneController,
-                decoration: apptextDecoration.main(hinttext_: "Enter Lane ..."),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: dobController,
-                decoration: apptextDecoration.main(
-                    hinttext_: "Enter DOB (e.g. 23rd Dec, 1990) ..."),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: phoneController,
-                decoration:
-                    apptextDecoration.main(hinttext_: "Enter Phone Number ..."),
-              ),
-              const SizedBox(height: 15),
-              if (errorMessage != null)
-                Text(
-                  errorMessage!,
-                  style: const TextStyle(color: Colors.red),
+      body: Stack(
+        children: [
+          // Background Image
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  'assets/images/wallArt.jpg', // Replace with your image path
                 ),
-              const SizedBox(height: 15),
-              GestureDetector(
-                child: const Text("Already have an account?"),
-                onTap: () => {Navigator.of(context).pushNamed('/login')},
+                fit: BoxFit.cover,
               ),
-              const SizedBox(height: 15),
-              GestureDetector(
-                onTap: _registerUser,
-                child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  decoration: buttonDecoration.main(color_: Colors.red),
-                  child: isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(color: Colors.white))
-                      : const Center(
-                          child: Text(
-                            "Compleete",
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                        ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          // Semi-transparent overlay
+          Container(
+            color: Colors.white.withOpacity(0.5),
+          ),
+          // Main content
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Container(
+              height: double.infinity,
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      controller: nameController,
+                      decoration:
+                          apptextDecoration.main(hinttext_: "Enter Name ..."),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: emailController,
+                      decoration:
+                          apptextDecoration.main(hinttext_: "Enter Email ..."),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      obscureText: true,
+                      controller: passwordController,
+                      decoration: apptextDecoration.main(
+                          hinttext_: "Enter Password ..."),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: homeNumberController,
+                      decoration: apptextDecoration.main(
+                          hinttext_: "Enter Home Number ..."),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: landmarkController,
+                      decoration: apptextDecoration.main(
+                          hinttext_: "Enter Landmark ..."),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: laneController,
+                      decoration:
+                          apptextDecoration.main(hinttext_: "Enter Lane ..."),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: dobController,
+                      decoration: apptextDecoration.main(
+                          hinttext_: "Enter DOB (e.g. 23rd Dec, 1990) ..."),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: phoneController,
+                      decoration: apptextDecoration.main(
+                          hinttext_: "Enter Phone Number ..."),
+                    ),
+                    const SizedBox(height: 15),
+                    if (errorMessage != null)
+                      Text(
+                        errorMessage!,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    const SizedBox(height: 15),
+                    GestureDetector(
+                      child: const Text("Already have an account?"),
+                      onTap: () => {Navigator.of(context).pushNamed('/login')},
+                    ),
+                    const SizedBox(height: 15),
+                    GestureDetector(
+                      onTap: _registerUser,
+                      child: Container(
+                        height: 50,
+                        width: double.infinity,
+                        decoration: buttonDecoration.main(color_: Colors.red),
+                        child: isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                    color: Colors.white))
+                            : const Center(
+                                child: Text(
+                                  "Complete",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                ),
+                              ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
