@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'OrderTrackingPage.dart'; // Import OrderTrackingPage
 
@@ -12,14 +12,14 @@ class NotificationsPage extends StatelessWidget {
         title: const Text('Notifications'),
         backgroundColor: Colors.black,
       ),
-      body: StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance.collection('notification').doc('notification1').snapshots(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('notification').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          if (!snapshot.hasData || !snapshot.data!.exists) {
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(
               child: Text(
                 'No notifications available.',
@@ -28,11 +28,15 @@ class NotificationsPage extends StatelessWidget {
             );
           }
 
-          final notification = snapshot.data!;
+          final notifications = snapshot.data!.docs;
 
-          return ListView(
-            children: [
-              ListTile(
+          return ListView.builder(
+            itemCount: notifications.length,
+            itemBuilder: (context, index) {
+              final notification = notifications[index];
+              bool isRead = notification['isRead'] ?? false;
+
+              return ListTile(
                 title: Text(notification['title'] ?? 'No Title'),
                 subtitle: Text(notification['description'] ?? 'No Description'),
                 trailing: notification['type'] == 'Order Tracking'
@@ -48,8 +52,16 @@ class NotificationsPage extends StatelessWidget {
                         child: const Text('Track Order'),
                       )
                     : null,
-              ),
-            ],
+                onTap: () {
+                  // Mark notification as read
+                  FirebaseFirestore.instance
+                      .collection('notification')
+                      .doc(notification.id)
+                      .update({'isRead': true});
+                },
+                tileColor: isRead ? Colors.white : Colors.yellow[100], // Highlight unread notifications
+              );
+            },
           );
         },
       ),

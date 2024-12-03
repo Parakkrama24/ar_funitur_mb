@@ -36,8 +36,7 @@ class MyApp extends StatelessWidget {
       home: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4),
-          child:
-              NotificationsPage(), // Load the notifications page as the home page
+          child: Loginscreen(), // Load the notifications page as the home page
         ),
       ),
       routes: <String, WidgetBuilder>{
