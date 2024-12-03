@@ -12,7 +12,6 @@ import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
 import 'package:kmwd/screens/Nortification/NotificationsPage.dart';
 import 'package:kmwd/screens/Nortification/OrderTrackingPage.dart';
-import 'package:kmwd/componnets/navBar/navbar.dart';
 
 void main() async {
   WidgetsFlutterBinding
