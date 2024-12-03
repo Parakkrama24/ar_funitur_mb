@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart'; // Import Firebase core
+import 'firebase_options.dart'; // This is the file generated during Firebase configuration
+
+// Import necessary screens
 import 'package:kmwd/screens/BillingPage.dart';
 import 'package:kmwd/componnets/navBar/navbar.dart';
 import 'package:kmwd/screens/authentcation/otherDetails.dart';
@@ -6,27 +10,26 @@ import 'package:kmwd/screens/shop.dart';
 import 'package:kmwd/screens/userDataUpdate.dart';
 import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-// Import the CartPage
+import 'package:kmwd/screens/Nortification/NotificationsPage.dart';
+import 'package:kmwd/screens/Nortification/OrderTrackingPage.dart';
+import 'package:kmwd/componnets/navBar/navbar.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensures that Firebase is initialized before the app starts
+
+  // Initialize Firebase with the correct options for your platform
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions
+        .currentPlatform, // Ensure this points to your Firebase configuration
   );
-  runApp(const MyApp());
+
+  runApp(const MyApp()); // Run the app after Firebase initialization
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,7 +38,7 @@ class _MyAppState extends State<MyApp> {
       home: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4),
-          child: Loginscreen(),
+          child: Loginscreen(), // Load the notifications page as the home page
         ),
       ),
       routes: <String, WidgetBuilder>{
@@ -50,6 +53,9 @@ class _MyAppState extends State<MyApp> {
         '/updateProfile': (context) => const UpdateUserDetails(),
         '/navBar': (context) => const Navbar(),
         '/otherDetails': (context) => const OtherDetails(),
+        '/notifications': (context) => const NotificationsPage(),
+        '/orderTracking': (context) => const OrderTrackingPage(
+            orderId: 'order_12345'), // Pass the orderId dynamically
       },
     );
   }
