@@ -49,7 +49,13 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false, // Removes the default back button
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back), // Back arrow icon
+          onPressed: () {
+            Navigator.pop(context); // Go back to the previous screen
+          },
+        ),
       ),
       body: FutureBuilder<List<CartItem>>(
         future: _cartItems,
@@ -71,10 +77,9 @@ class _CartPageState extends State<CartPage> {
                   itemBuilder: (context, index) {
                     final cartItem = cartItems[index];
                     return Dismissible(
-                      key: Key(cartItem.item.name), // Ensure unique key
+                      key: Key(cartItem.item.name),
                       direction: DismissDirection.startToEnd,
                       onDismissed: (direction) {
-                        // Remove item from cart (both locally and Firebase)
                         _removeItemFromCart(cartItem, index);
                       },
                       background: Container(
