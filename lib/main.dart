@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart'; // Import Firebase core
-import 'firebase_options.dart'; // This is the file generated during Firebase configuration
-
-// Import necessary screens
+import 'package:firebase_core/firebase_core.dart';
+import 'package:kmwd/screens/welcom.dart';
+import 'firebase_options.dart';
 import 'package:kmwd/screens/BillingPage.dart';
 import 'package:kmwd/componnets/navBar/navbar.dart';
 import 'package:kmwd/screens/authentcation/otherDetails.dart';
@@ -14,19 +13,14 @@ import 'package:kmwd/screens/Nortification/NotificationsPage.dart';
 import 'package:kmwd/screens/Nortification/OrderTrackingPage.dart';
 
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); // Ensures that Firebase is initialized before the app starts
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase with the correct options for your platform
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions
-        .currentPlatform, // Ensure this points to your Firebase configuration
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(const MyApp());
 }
-
-///hdjefh
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -39,7 +33,7 @@ class MyApp extends StatelessWidget {
       home: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4),
-          child: Loginscreen(), // Load the notifications page as the home page
+          child: WelcomePage(),
         ),
       ),
       routes: <String, WidgetBuilder>{
@@ -55,8 +49,8 @@ class MyApp extends StatelessWidget {
         '/navBar': (context) => const Navbar(),
         '/otherDetails': (context) => const OtherDetails(),
         '/notifications': (context) => const NotificationsPage(),
-        '/orderTracking': (context) => const OrderTrackingPage(
-            orderId: 'order_12345'), // Pass the orderId dynamically
+        '/orderTracking': (context) =>
+            const OrderTrackingPage(orderId: 'order_12345'),
       },
     );
   }

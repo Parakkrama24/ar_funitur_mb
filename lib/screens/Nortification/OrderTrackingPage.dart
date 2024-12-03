@@ -12,13 +12,12 @@ class OrderTrackingPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Order Tracking',
             style: TextStyle(
-              color: Colors.white, // Replace with your font family name
+              color: Colors.white,
             )),
         backgroundColor: const Color.fromARGB(255, 204, 16, 16),
         centerTitle: true,
       ),
       body: FutureBuilder<DocumentSnapshot>(
-        // Query the 'orders' collection and the document with the provided orderId
         future:
             FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
         builder: (context, snapshot) {

@@ -85,7 +85,10 @@ flutter:
     - assets/images/bed.jpg
     - assets/images/i01.jpg
     - assets/images/i02.jpg
-    - https://pixabay.com/photos/image-7428108/
+    - assets/images/i04.jpg
+    - assets/images/i03.jpg
+    - assets/images/i05.jpg
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
