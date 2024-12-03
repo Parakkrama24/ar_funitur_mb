@@ -42,13 +42,6 @@ class _CartPageState extends State<CartPage> {
       appBar: AppBar(
         title: const Text("Cart"),
         backgroundColor: Colors.black,
-        automaticallyImplyLeading: false, // Removes the default back button
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back), // Back arrow icon
-          onPressed: () {
-            Navigator.pop(context); // Go back to the previous screen
-          },
-        ),
       ),
       body: FutureBuilder<List<CartItem>>(
         future: _fetchCartItems(),
@@ -82,10 +75,6 @@ class _CartPageState extends State<CartPage> {
                       direction: DismissDirection.startToEnd,
                       onDismissed: (direction) {
                         _removeItemFromCart(cartItem);
-                      key: Key(cartItem.item.name),
-                      direction: DismissDirection.startToEnd,
-                      onDismissed: (direction) {
-                        _removeItemFromCart(cartItem, index);
                       },
                       background: Container(
                         color: Colors.red,
