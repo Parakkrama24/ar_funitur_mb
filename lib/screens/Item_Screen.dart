@@ -154,23 +154,23 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               children: [
                 ElevatedButton(
                   onPressed: addToCart,
-                  child: const Text("Add to Cart"),
                   style: ElevatedButton.styleFrom(
                     elevation: 5, // Adding shadow
                     shadowColor: Colors.black.withOpacity(0.2),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 12),
                   ),
+                  child: const Text("Add to Cart"),
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Text("Checkout"),
                   style: ElevatedButton.styleFrom(
                     elevation: 5, // Adding shadow
                     shadowColor: Colors.black.withOpacity(0.2),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 12),
                   ),
+                  child: const Text("Checkout"),
                 ),
               ],
             ),

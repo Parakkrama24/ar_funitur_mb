@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kmwd/styles/Style.dart';
 import 'package:kmwd/Database/auth_service.dart'; // Import the AuthService
-import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
+// Import Firestore
 
 class OtherDetails extends StatefulWidget {
   const OtherDetails({super.key});

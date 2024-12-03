@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kmwd/models/Item.dart';
 import 'package:kmwd/componnets/cart/CartItem.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kmwd/screens/BillingPage.dart'; // Import your checkout page
@@ -50,7 +49,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cart"),
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<List<CartItem>>(
         future: _cartItems,
@@ -123,7 +122,7 @@ class _CartPageState extends State<CartPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BillingPage(
+                builder: (context) => const BillingPage(
                     totalPrice: 122, // Update with actual value
                     deliveryCharge: 122, // Update with actual value
                     deliveryDate: "gdhd")), // Update with actual value

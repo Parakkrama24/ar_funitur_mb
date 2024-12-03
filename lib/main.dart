@@ -23,8 +23,10 @@ void main() async {
         .currentPlatform, // Ensure this points to your Firebase configuration
   );
 
-  runApp(const MyApp()); // Run the app after Firebase initialization
+  runApp(const MyApp());
 }
+
+///hdjefh
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
