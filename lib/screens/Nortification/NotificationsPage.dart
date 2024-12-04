@@ -2,15 +2,84 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'OrderTrackingPage.dart'; // Import OrderTrackingPage
 
-class NotificationsPage extends StatelessWidget {
+class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
+
+  @override
+  _NotificationsPageState createState() => _NotificationsPageState();
+}
+
+class _NotificationsPageState extends State<NotificationsPage> {
+  int unreadCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateUnreadCount();
+  }
+
+  // Method to count unread notifications
+  void _updateUnreadCount() async {
+    // Fetch unread notifications from Firestore
+    final snapshot = await FirebaseFirestore.instance
+        .collection('notification')
+        .where('isRead', isEqualTo: false)
+        .get();
+
+    setState(() {
+      unreadCount = snapshot.docs.length;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+<<<<<<< Updated upstream
         title: const Text('Notifications'),
         backgroundColor: Colors.black,
+=======
+        title: const Text('Notifications',
+            style: TextStyle(
+              color: Colors.white, // Replace with your font family name
+            )),
+        backgroundColor: const Color.fromARGB(255, 204, 16, 16),
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        actions: [
+          // Notification Icon with unread count
+          Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.notifications),
+                onPressed: () {
+                  _updateUnreadCount(); // Refresh unread count when tapped
+                },
+              ),
+              if (unreadCount > 0)
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Text(
+                      unreadCount.toString(),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ],
+>>>>>>> Stashed changes
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('notification').snapshots(),
@@ -52,12 +121,15 @@ class NotificationsPage extends StatelessWidget {
                         child: const Text('Track Order'),
                       )
                     : null,
-                onTap: () {
-                  // Mark notification as read
-                  FirebaseFirestore.instance
+                onTap: () async {
+                  // Mark notification as read immediately
+                  await FirebaseFirestore.instance
                       .collection('notification')
                       .doc(notification.id)
                       .update({'isRead': true});
+
+                  // Refresh unread count after marking as read
+                  _updateUnreadCount();
                 },
                 tileColor: isRead ? Colors.white : Colors.yellow[100], // Highlight unread notifications
               );

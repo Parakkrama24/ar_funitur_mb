@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kmwd/componnets/profilePage/UpdareProfileButton.dart';
@@ -20,16 +21,18 @@ class _UserdetailsState extends State<Userdetails> {
 
   Future<void> fetchUserData() async {
     try {
-      // Replace 'users' and 'userId' with your actual collection name and document ID
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc('userId')
-          .get();
+      String? userId = FirebaseAuth.instance.currentUser?.uid;
+      if (userId != null) {
+        final doc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .get();
 
-      if (doc.exists) {
-        setState(() {
-          userData = doc.data(); // Store user data in the state
-        });
+        if (doc.exists) {
+          setState(() {
+            userData = doc.data(); // Store user data in the state
+          });
+        }
       }
     } catch (e) {
       print('Error fetching user data: $e');
@@ -43,8 +46,7 @@ class _UserdetailsState extends State<Userdetails> {
         padding: const EdgeInsets.all(16.0),
         child: userData == null
             ? const Center(
-                child:
-                    CircularProgressIndicator()) // Show loader while data is being fetched
+                child: CircularProgressIndicator()) // Show loader while data is being fetched
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -73,35 +75,43 @@ class _UserdetailsState extends State<Userdetails> {
                   const SizedBox(height: 16.0),
                   Row(
                     children: [
-                      const Icon(Icons.phone),
-                      const SizedBox(width: 8.0),
-                      Text(userData?['phone'] ?? 'No Phone'),
+                      const Text('Home Number: '),
+                      Text(userData?['homeNumber'] ?? 'No data'),
                     ],
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 8.0),
                   Row(
                     children: [
-                      const Icon(Icons.calendar_today),
-                      const SizedBox(width: 8.0),
-                      Text(userData?['dob'] ?? 'No DOB'),
+                      const Text('Landmark: '),
+                      Text(userData?['landmark'] ?? 'No data'),
                     ],
                   ),
-                  const Spacer(),
-                  const Updateprofilebutton()
+                  const SizedBox(height: 8.0),
+                  Row(
+                    children: [
+                      const Text('Lane: '),
+                      Text(userData?['lane'] ?? 'No data'),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    children: [
+                      const Text('Date of Birth: '),
+                      Text(userData?['dob'] ?? 'No data'),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    children: [
+                      const Text('Phone Number: '),
+                      Text(userData?['phone'] ?? 'No data'),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  UpdateProfileButton(),
                 ],
               ),
       ),
     );
   }
 }
-
- //example data base
- 
-
-// {
-//   "name": "Sam Smith",
-//   "email": "samsmith@mail.com",
-//   "phone": "+1 987 654 3210",
-//   "dob": "23rd Dec, 1990",
-//   "profileImageUrl": "https://example.com/path-to-profile-image.jpg"
-// }

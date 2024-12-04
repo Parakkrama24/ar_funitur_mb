@@ -13,8 +13,7 @@ class AuthService {
   }) async {
     try {
       // Create user in Firebase Auth
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -23,6 +22,11 @@ class AuthService {
       await _firestore.collection('users').doc(userCredential.user!.uid).set({
         'name': name,
         'email': email,
+        'homeNumber': homeNumber,
+        'landmark': landmark,
+        'lane': lane,
+        'dob': dob,
+        'phone': phone,
         'createdAt': FieldValue.serverTimestamp(),
       });
 
@@ -33,8 +37,7 @@ class AuthService {
   }
 
   // Login user
-  Future<String?> loginUser(
-      {required String email, required String password}) async {
+  Future<String?> loginUser({required String email, required String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return null; // Null indicates success

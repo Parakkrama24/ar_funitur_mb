@@ -10,7 +10,11 @@ import 'package:kmwd/screens/authentcation/LoginScreen.dart';
 import 'package:kmwd/screens/authentcation/Register.dart';
 import 'package:kmwd/screens/Nortification/NotificationsPage.dart';
 import 'package:kmwd/screens/Nortification/OrderTrackingPage.dart';
+<<<<<<< Updated upstream
 import 'package:kmwd/componnets/navBar/navbar.dart';
+=======
+import 'package:kmwd/screens/Home.dart';
+>>>>>>> Stashed changes
 
 void main() async {
   WidgetsFlutterBinding
