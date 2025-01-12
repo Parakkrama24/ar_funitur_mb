@@ -1,4 +1,4 @@
-# kmwd
+# E-Commerce Mobile Application
 
 A new Flutter project.
 
